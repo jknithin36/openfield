@@ -17,10 +17,14 @@ export function AuthGuard({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     if (hydrated && !signedIn) router.replace("/sign-in");
   }, [hydrated, signedIn, router]);
-  if (!hydrated || !signedIn)
+  // Render the page as normal (so it can be prerendered and validated for
+  // instant navigation). Only once we know the visitor is signed out do we
+  // hide it and send them to sign in. Pages show demo data only after the
+  // stores load in the browser, so nothing private appears before this.
+  if (hydrated && !signedIn)
     return (
       <p className="p-8 text-neutral-600" aria-busy="true">
-        Checking you&apos;re signed in…
+        Taking you to sign in…
       </p>
     );
   return <>{children}</>;

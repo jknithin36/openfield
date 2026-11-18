@@ -1,6 +1,6 @@
 import { TopicGrid } from "@/components/site/centers/centers-index";
 
-/** Same topics, counts and "Popular" pick as /centers. */
+/** The six topics, simply: name and one line each. Details live on /centers. */
 export function HomeCenters() {
   return (
     <section
@@ -14,7 +14,7 @@ export function HomeCenters() {
         >
           Find help by topic
         </h2>
-        <TopicGrid headingLevel="h3" />
+        <TopicGrid headingLevel="h3" simple />
       </div>
     </section>
   );

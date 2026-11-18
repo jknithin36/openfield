@@ -104,7 +104,7 @@ export function SignIn() {
           e.preventDefault();
           submit();
         }}
-        className="mt-6 flex flex-col gap-5 rounded-2xl bg-white p-6 shadow-sm ring-1 ring-black/5 sm:p-8"
+        className="mt-6 flex flex-col gap-5 rounded-2xl border border-border bg-white p-6 sm:p-8"
       >
         <ErrorSummary errors={errors} />
         <Field id="email" label="Email address" error={err("email")}>
@@ -154,7 +154,7 @@ export function SignIn() {
 
       <section
         aria-labelledby="demo-h"
-        className="mt-6 rounded-2xl border border-dashed border-brand/40 bg-white/70 p-6"
+        className="mt-6 rounded-2xl border border-dashed border-brand/40 bg-white p-6"
       >
         <h2 id="demo-h" className="text-lg font-medium text-ink">
           Exploring the template?
@@ -215,7 +215,7 @@ export function ForgotPassword() {
           setErrors(x ? [{ fieldId: "fp-email", message: x }] : []);
           if (!x) router.push(`/forgot-password/sent?email=${encodeURIComponent(email.trim())}`);
         }}
-        className="mt-6 flex flex-col gap-5 rounded-2xl bg-white p-6 shadow-sm ring-1 ring-black/5 sm:p-8"
+        className="mt-6 flex flex-col gap-5 rounded-2xl border border-border bg-white p-6 sm:p-8"
       >
         <ErrorSummary errors={errors} />
         <Field id="fp-email" label="Email address" error={err}>
@@ -246,7 +246,7 @@ export function ForgotPasswordSent() {
   useEffect(() => h.current?.focus(), []);
   return (
     <div className="w-full max-w-[440px]">
-      <div className="rounded-2xl bg-white p-6 shadow-sm ring-1 ring-black/5 sm:p-8">
+      <div className="rounded-2xl border border-border bg-white p-6 sm:p-8">
         <h1
           ref={h}
           tabIndex={-1}

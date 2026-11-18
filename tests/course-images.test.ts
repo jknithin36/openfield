@@ -15,3 +15,13 @@ test("every course has a picture, and every picture file exists", () => {
     expect(img!.alt.length).toBeGreaterThan(20);
   }
 });
+
+test("every event has a picture, and every picture file exists", async () => {
+  const { createEventsData } = await import("@/data/events");
+  const { EVENT_IMAGE } = await import("@/lib/content");
+  for (const e of createEventsData(new Date()).events) {
+    const img = EVENT_IMAGE[e.slug];
+    expect(img, `${e.slug} has no picture`).toBeDefined();
+    expect(existsSync(join(process.cwd(), "public", img.src)), `${img.src} is missing`).toBe(true);
+  }
+});

@@ -45,7 +45,7 @@ export default function AuthLayout({ children }: LayoutProps<"/">) {
       <main
         id="main-content"
         tabIndex={-1}
-        className="flex flex-1 justify-center bg-linear-to-br from-[#e8f0f2] to-[#e6eee4] px-6 py-12 outline-none sm:py-20"
+        className="flex flex-1 justify-center bg-white px-6 py-12 outline-none sm:py-20"
       >
         {children}
       </main>

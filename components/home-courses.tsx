@@ -18,7 +18,15 @@ export function HomeCourses() {
   useEffect(() => hydrateContent(), []);
   const live = useContentStore((s) => (s.hydrated ? s.data?.courses : null));
   const all = live ?? STATIC_COURSES;
-  const courses = homeCourses(all);
+  // Six courses: one per audience, plus a second for parents (featured first).
+  const courses = homeCourses(all, [
+    "parent",
+    "teacher",
+    "employer",
+    "provider",
+    "self-advocate",
+    "parent",
+  ]);
   const total = all.filter((c) => c.status === "published").length;
 
   return (

@@ -95,9 +95,44 @@ export const EVENTS = [
 ] as const;
 
 /** Photos for events, by slug. Events without one show a plain date block. */
-export const EVENT_IMAGE: Record<string, { src: string; alt: string }> = Object.fromEntries(
-  EVENTS.map((e) => [e.slug, { src: e.image, alt: e.alt }]),
-);
+/** Events without a photo reuse the closest course illustration. */
+const EVENT_ILLUSTRATION: Record<string, { file: string; alt: string }> = {
+  "calm-spaces-at-home": {
+    file: "calm-down-strategies-at-home",
+    alt: "A child rests on a big cushion under a soft tent, with a glowing lamp and a sand timer nearby.",
+  },
+  "family-night-iep-meetings": {
+    file: "writing-a-good-iep-goal",
+    alt: "Three people sit around a table with one shared sheet of paper, below three steps leading to a flag.",
+  },
+  "sign-language-for-families": {
+    file: "sign-language-basics-for-families",
+    alt: "A parent and a child sit facing each other, using their hands to sign.",
+  },
+  "coffee-morning-for-dads": {
+    file: "supporting-siblings",
+    alt: "Two children sit side by side, one with an arm around the other, with a parent behind them.",
+  },
+  "visual-supports-in-the-classroom-workshop": {
+    file: "visual-supports-in-the-classroom",
+    alt: "A teacher points to a column of picture cards while two children sit and watch.",
+  },
+  "assistive-tech-open-house": {
+    file: "switch-access-for-beginners",
+    alt: "A child in a wheelchair presses a large button switch connected to a laptop showing a star.",
+  },
+};
+
+/** Pictures for events, by slug: a photo, or a matching course illustration. */
+export const EVENT_IMAGE: Record<string, { src: string; alt: string }> = {
+  ...Object.fromEntries(
+    Object.entries(EVENT_ILLUSTRATION).map(([slug, x]) => [
+      slug,
+      { src: `/learn/courses/${x.file}.webp`, alt: x.alt },
+    ]),
+  ),
+  ...Object.fromEntries(EVENTS.map((e) => [e.slug, { src: e.image, alt: e.alt }])),
+};
 
 export const FAMILY_GUIDES = [
   { href: "/families/just-got-a-diagnosis", label: "Just got a diagnosis" },

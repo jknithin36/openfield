@@ -20,8 +20,33 @@ import { tel } from "@/components/site/library/use-public-library";
 const link = `rounded-sm font-medium text-brand underline decoration-brand/30 underline-offset-4 outline-none hover:decoration-brand ${focusRing}`;
 
 /** The 6 topic boxes. Names and summaries render at once; live counts follow. */
-export function TopicGrid({ headingLevel = "h2" }: { headingLevel?: "h2" | "h3" }) {
+/** `simple` shows just the name and summary (home page); the full version adds "Popular" and counts. */
+export function TopicGrid({
+  headingLevel = "h2",
+  simple = false,
+}: {
+  headingLevel?: "h2" | "h3";
+  simple?: boolean;
+}) {
   const s = useCenterSources();
+  if (simple)
+    return (
+      <ul className="grid gap-x-12 gap-y-7 sm:grid-cols-2 lg:grid-cols-3">
+        {CENTERS.map((c) => {
+          const H = headingLevel;
+          return (
+            <li key={c.slug}>
+              <H className="text-[17px] leading-snug">
+                <Link href={`/centers/${c.slug}`} className={link}>
+                  {c.name}
+                </Link>
+              </H>
+              <p className="mt-1 text-[15px] leading-relaxed text-neutral-600">{c.summary}</p>
+            </li>
+          );
+        })}
+      </ul>
+    );
   return (
     <ul className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
       {CENTERS.map((c) => (
